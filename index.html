@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <!-- 
+        务必用最新的设计和开发标准武装你的页面。
+        这意味着使用 HTML5 doctype 声明、添加一个 viewport 标签让页面正确支持响应式布局。
+     -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="./css/bootstrap.css">
+    <link rel="stylesheet" href="./css/bootstrap-grid.css">
+    <link rel="stylesheet" href="./css/bootstrap-reboot.css">
+    <!-- 
+        Bootstrap JavaScript
+        jQuery first, then Popper.js, then Bootstrap JS
+    -->
+    <script src="./js/jquery.slim.min.js"></script>
+    <script src="./js/popper.min.js"></script>
+    <script src="./js/bootstrap.js"></script>
+    <script src="./js/bootstrap.bundle.js"></script>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+            aria-expanded="false" aria-label="Toggle navigation"></button>
+        <div class="collapse navbar-collapse" id="collapsibleNavId">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownId">
+                        <a class="dropdown-item" href="#">Action 1</a>
+                        <a class="dropdown-item" href="#">Action 2</a>
+                    </div>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-12  col-md-auto  col-lg-auto border">
+
+                <div class="row mt-3 md-3">
+                    <div class="col-auto">
+                        <div class="row justify-content-between">
+                            <div class="col-auto">
+                                <input type="text" class="form-control" name="search" id="search" aria-describedby="search" placeholder="">
+                            </div>
+                            <div class="col-auto pl-0">
+                                <button type="button" class="btn btn-secondary">搜索</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-auto pl-1  d-lg-none d-xl-none  d-sm-block  d-md-block ">
+                        <!-- <button type="button" data-toggle="collapse" href="#contentId" class="btn btn-secondary">
+                            --
+                        </button> -->
+                        <button type="button" data-toggle="collapse" href="#contentId" class="btn btn-secondary" aria-label="Left Align">
+                            <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-12 pr-0 pl-0">
+
+                        <div class="collapse ml-0 mr-0" id="contentId">
+                            <div id="accordianId" role="tablist" aria-multiselectable="treu">
+                                <div class="card">
+                                    <div class="card-header" role="tab" id="section1HeaderId">
+                                        <a class="nav-link" data-toggle="collapse" href="#section1ContentId" aria-expanded="false" aria-controls="section1ContentId">
+                                            人员信息数据化管理
+                                        </a>
+                                    </div>
+                                    <!--
+                                        注意！data-parent必须放置在card-body上一层的div上才能实现多个card的手风琴开关效果
+                                        并且data-parent必须同时指向整个card组的最外层div，用以表示这些card是属于同一个parent的
+                                        因此同一时间只能打开其中一个card
+                                    -->
+                                    <div id="section1ContentId" class="collapse in" data-parent="#accordianId" role="tabpanel" aria-labelledby="section1HeaderId">
+                                        <div class="card-body">
+
+                                            <ul class="navbar-nav mr-auto mt-0 pt-0">
+                                                <li class="nav-item active">
+                                                    <a class="nav-link" href="#">Home
+                                                        <span class="sr-only">(current)</span>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="#">Link</a>
+                                                </li>
+                                                <li class="nav-item dropdown">
+                                                    <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownId">
+                                                        <a class="dropdown-item" href="#">Action 1</a>
+                                                        <a class="dropdown-item" href="#">Action 2</a>
+                                                    </div>
+                                                </li>
+                                            </ul>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header" role="tab" id="section2HeaderId">
+                                        <a class="nav-link" data-toggle="collapse" href="#section2ContentId" aria-expanded="false" aria-controls="section2ContentId">
+                                            项目管理
+                                        </a>
+                                    </div>
+                                    <!--
+                                        注意！data-parent必须放置在card-body上一层的div上才能实现多个card的手风琴开关效果
+                                        并且data-parent必须同时指向整个card组的最外层div，用以表示这些card是属于同一个parent的
+                                        因此同一时间只能打开其中一个card
+                                    -->
+                                    <div id="section2ContentId" class="collapse in" role="tabpanel" data-parent="#accordianId" aria-labelledby="section2HeaderId">
+                                        <div class="card-body">
+
+                                            <ul class="navbar-nav mr-auto mt-0 pt-0">
+                                                <li class="nav-item active">
+                                                    <a class="nav-link" href="#">Home
+                                                        <span class="sr-only">(current)</span>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="#">Link</a>
+                                                </li>
+                                                <li class="nav-item dropdown">
+                                                    <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownId">
+                                                        <a class="dropdown-item" href="#">Action 1</a>
+                                                        <a class="dropdown-item" href="#">Action 2</a>
+                                                    </div>
+                                                </li>
+                                            </ul>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12  col-md-auto  col-lg-auto">
+                aria-haspopup
+            </div>
+
+        </div>
+    </div>
+
+    <a name="toggle" id="toggle" class="btn btn-primary" href="javascript:toggle();" role="button">折叠切换</a>
+    <script>
+        if (window.screen.availWidth >= 768) {
+            $('#contentId').collapse({
+                toggle: true
+            });
+        }
+
+        function toggle() {
+            /*
+             要操作Collapse中的某一个特定的card的时候，需要先获取到该card的card-body上一层的div的id
+             然后再通过执行collapse()配合 hide（关闭）、show（展开）、toggle（切换——结合了hide和show）
+            */
+            console.log("关闭关闭")
+            $('#section1ContentId').collapse('toggle');
+        }
+    </script>
+
+
+
+
+</body>
+
+</html>
