@@ -66,8 +66,11 @@
             <!-- 
                 col-xx-auto  用于包裹内部内容，实现根据内容物自动修改占用栅格数
                 col-xx  不加数字的意思就是占据剩余的全部栅格
+                但是这样能呈现更好的布局分配，但是如果其中一个列中的横向内容过大
+                则就会另起一行，比如一张很大的表格....(如何解决这个问题呢？)
+                所以还是不得不指定具体的数字来分配布局。
             -->
-            <div class="col-md-auto col-lg-auto col-xs-12  border">
+            <div class="col-xs-12 col-md-2 col-lg-2  border">
 
                 <div class="row mt-3 md-3">
                     <div class="col">
@@ -86,13 +89,13 @@
                         </button>
                     </div>
                 </div>
-                <div class="row mt-3">
+                <div class="row mt-3 ">
                     <div class="col-12 pr-0 pl-0">
 
-                        <div class="collapse ml-0 mr-0" id="contentId">
+                        <div class="collapse mx-0" id="contentId">
                             <div id="accordianId" role="tablist" aria-multiselectable="treu">
                                 <div class="card">
-                                    <div class="card-header" role="tab" id="section1HeaderId">
+                                    <div class="card-header px-0 py-1" role="tab" id="section1HeaderId">
                                         <a class="nav-link" data-toggle="collapse" href="#section1ContentId" aria-expanded="false" aria-controls="section1ContentId">
                                             人员信息数据化管理
                                         </a>
@@ -103,7 +106,7 @@
                                         因此同一时间只能打开其中一个card
                                     -->
                                     <div id="section1ContentId" class="collapse in" data-parent="#accordianId" role="tabpanel" aria-labelledby="section1HeaderId">
-                                        <div class="card-body">
+                                        <div class="card-body py-1">
 
                                             <ul class="navbar-nav mr-auto mt-0 pt-0">
                                                 <li class="nav-item active">
@@ -127,7 +130,7 @@
                                     </div>
                                 </div>
                                 <div class="card">
-                                    <div class="card-header" role="tab" id="section2HeaderId">
+                                    <div class="card-header px-0 py-1" role="tab" id="section2HeaderId">
                                         <a class="nav-link" data-toggle="collapse" href="#section2ContentId" aria-expanded="false" aria-controls="section2ContentId">
                                             项目管理
                                         </a>
@@ -138,7 +141,7 @@
                                         因此同一时间只能打开其中一个card
                                     -->
                                     <div id="section2ContentId" class="collapse in" role="tabpanel" data-parent="#accordianId" aria-labelledby="section2HeaderId">
-                                        <div class="card-body">
+                                        <div class="card-body py-1">
 
                                             <ul class="navbar-nav mr-auto mt-0 pt-0">
                                                 <li class="nav-item active">
@@ -168,14 +171,14 @@
                 </div>
             </div>
             <!-- ====================================右侧正文部分===================================== -->
-            <div class="col col-xs-12 ">
+            <div class="col-xs-12 col-md-10 col-lg-10">
                 <!-- =================导航条(面包屑)=============== -->
                 <div class="row">
-                    <div class="col px-0" style="width:100%">
-                        <ol class="breadcrumb bg-light border-bottom d-flex flex-nowrap " style="
+                    <div class="col px-0">
+                        <ol style="
                         white-space: nowrap;
                         overflow-x: hidden;
-                        overflow-x: auto;">
+                        overflow-x: auto;" class="breadcrumb bg-light border-bottom d-flex flex-nowrap " >
                             <li class="breadcrumb-item">
                                 <a href="#">AAA</a>
                             </li>
@@ -208,27 +211,62 @@
                 <!-- =================================★★真正的页面数据内容显示区域★★===================================== -->
                 <div class="row">
                     <div class="col">
-
                         <h2>Section title</h2>
-                        <div class="table-responsive">
-                            <table class="table table-striped table-sm table-hover table-bordered">
+                        <div  style="
+                        white-space: nowrap;
+                        overflow-x: hidden;
+                        overflow-x: auto;">
+                            <table class="table table-striped table-sm table-hover table-bordered text-center">
                                 <thead class="thead-dark">
                                     <tr>
                                         <th>#</th>
-                                        <th>Header</th>
-                                        <th>Header</th>
-                                        <th>Header</th>
-                                        <th>Header</th>
-                                        <th>Header</th>
-                                        <th>Header</th>
-                                        <th>Header</th>
-                                        <th>Header</th>
+                                        <th>用户名</th>
+                                        <th>昵称</th>
+                                        <th>性别</th>
+                                        <th>年龄</th>
+                                        <th>分组</th>
+                                        <th>服务时长（时）</th>
+                                        <th>积分</th>
+                                        <th>电话</th>
+                                        <th>住址</th>
+                                        <th>邮箱</th>
+                                        <th>身份证</th>
+                                        <th>注册日期</th>
+                                        <th>是否在公众号</th>
+                                        <th>账号状态</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr class="table-primary">
-                                        <td>1,001</td>
-                                        <td>Lorem</td>
+                                        <td>1</td>
+                                        <td>张三李四</td>
+                                        <td>isthereanybody</td>
+                                        <td>男</td>
+                                        <td>1000</td>
+                                        <td>
+                                            <span class="badge badge-success">一级管理者</span>
+                                        </td>
+                                        <td>11.12</td>
+                                        <td>300</td>
+                                        <td>13718805500</td>
+                                        <td>北京市朝阳区呼家楼街道向军北里13楼A座3单元207号</td>
+                                        <td>isthereanybody@foxmail.com</td>
+                                        <td>110105198808211118</td>
+                                        <td>2018-03-11 21:33:56</td>
+                                        <td>是</td>
+                                        <td>
+                                            <span class="badge badge-success">正常</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>1,003</td>
+                                        <td>libero</td>
+                                        <td>Sed</td>
+                                        <td class="table-info">cursus</td>
+                                        <td>ipsum</td>
+                                        <td>dolor</td>
+                                        <td>ipsum</td>
+                                        <td>dolor</td>
                                         <td>ipsum</td>
                                         <td>dolor</td>
                                         <td>sit</td>
@@ -236,83 +274,6 @@
                                         <td>sit</td>
                                         <td>sit</td>
                                         <td>sit</td>
-                                    </tr>
-                                    <tr class="table-danger">
-                                        <td>1,002</td>
-                                        <td>amet</td>
-                                        <td>consectetur</td>
-                                        <td>adipiscing</td>
-                                        <td>elit</td>
-                                        <td>elit</td>
-                                        <td>elit</td>
-                                        <td>elit</td>
-                                        <td>elit</td>
-                                    </tr>
-                                    <tr class="table-secondary">
-                                        <td>1,003</td>
-                                        <td>Integer</td>
-                                        <td>nec</td>
-                                        <td>odio</td>
-                                        <td>Praesent</td>
-                                        <td>Praesent</td>
-                                        <td>Praesent</td>
-                                        <td>Praesent</td>
-                                        <td>Praesent</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1,003</td>
-                                        <td>libero</td>
-                                        <td>Sed</td>
-                                        <td class="table-info">cursus</td>
-                                        <td>ante</td>
-                                        <td>ante</td>
-                                        <td>ante</td>
-                                        <td>ante</td>
-                                        <td>ante</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1,004</td>
-                                        <td>dapibus</td>
-                                        <td>diam</td>
-                                        <td>Sed</td>
-                                        <td>nisi</td>
-                                        <td>nisi</td>
-                                        <td>nisi</td>
-                                        <td>nisi</td>
-                                        <td>nisi</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1,005</td>
-                                        <td>Nulla</td>
-                                        <td>quis</td>
-                                        <td>sem</td>
-                                        <td>at</td>
-                                        <td>at</td>
-                                        <td>at</td>
-                                        <td>at</td>
-                                        <td>at</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1,006</td>
-                                        <td>nibh</td>
-                                        <td>elementum</td>
-                                        <td>imperdiet</td>
-                                        <td>Duis</td>
-                                        <td>Duis</td>
-                                        <td>Duis</td>
-                                        <td>Duis</td>
-                                        <td>Duis</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1,007</td>
-                                        <td>sagittis</td>
-                                        <td>ipsum</td>
-                                        <td>Praesent</td>
-                                        <td>mauris</td>
-                                        <td>mauris</td>
-                                        <td>mauris</td>
-                                        <td>mauris</td>
-                                        <td>mauris</td>
                                     </tr>
                                 </tbody>
                             </table>
