@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <title>组织层级化管理</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <!-- 
+        务必用最新的设计和开发标准武装你的页面。
+        这意味着使用 HTML5 doctype 声明、添加一个 viewport 标签让页面正确支持响应式布局。
+     -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="./css/bootstrap.css">
+    <!-- <link rel="stylesheet" href="./css/bootstrap-grid.css">
+    <link rel="stylesheet" href="./css/bootstrap-reboot.css"> -->
+    <!-- 
+        Bootstrap JavaScript
+        jQuery first, then Popper.js, then Bootstrap JS
+    -->
+    <script src="./js/jquery.slim.min.js"></script>
+    <script src="./js/popper.min.js"></script>
+    <script src="./js/bootstrap.js"></script>
+    <script src="./js/bootstrap.bundle.js"></script>
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <!-- ============================正文部分========================== -->
+        <div class="row">
+
+            <!-- ====================================右侧正文部分===================================== -->
+            <div class="col-xs-12 col-md-10 col-lg-10">
+               
+                <!-- =================================★★真正的页面数据内容显示区域★★===================================== -->
+                <div class="row">
+                    <div class="col">
+                        <!-- =============标题=========== -->
+                        <div class="justify-content-between d-flex flex-wrap flex-md-nowrap align-items-center pb-1 mb-4 border-bottom">
+                            <h1 class="h2">用户信息</h1>
+                            <div class="btn-toolbar mb-2 mb-md-0">
+                                <div class="btn-group mr-2">
+                                    <button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#newUser">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                        新建
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#selectUsers">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                        筛选
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#selectUsers">
+                                        <span class="glyphicon glyphicon-sort-by-order"></span>
+                                        排序
+                                    </button>
+                                </div>
+                                <button class="btn btn-sm btn-outline-secondary dropdown-toggle" data-toggle="toggle" data-target="#">
+                                    <span class="glyphicon glyphicon-cog"></span>
+                                    其他
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- =============表格=========== -->
+                        <div style="
+                        white-space: nowrap;
+                        overflow-x: hidden;
+                        overflow-x: auto;">
+                            <table class="table table-striped table-sm table-bordered table-hover text-center">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>名称</th>
+                                        <th>mflid</th>
+                                        <th>描述</th>
+                                        <th>级别</th>
+                                        <th>管理者</th>
+                                        <th>社区数量</th>
+                                        <th>管辖人数</th>                                     
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <!-- 点击名称弹出详细信息dialog -->
+                                        <td>呼家楼</td>
+                                        <td>402881e9626cd34b01626cd3986b0000</td>
+                                        <td>北京市朝阳区呼家楼街道办事处</td>
+                                        <td>-1</td>
+                                        <!-- 点击此处可以指派同级别管理者 -->
+                                        <td>未分配</td>
+                                        <!-- 点击数字可以查看下一级的全部层级对象的列表页面 -->
+                                        <td>10</td>
+                                        <!-- 点击人数数字可以查看当前级别所管理的所有人员的列表也买你 -->
+                                        <td>3000</td>
+                                        <td>
+                                            <div class="btn-group" role="group">
+                                                <button type="button" class="btn btn-outline-secondary btn-sm">修改</button>
+                                                <button type="button" class="btn btn-outline-secondary btn-sm">通知</button>
+                                                <button type="button" class="btn btn-outline-secondary btn-sm">其他</button>
+                                            </div>
+
+                                        </td>
+                                    </tr>   
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- 分页栏 -->
+                        <nav aria-label="Page navigation" class="mt-3">
+                          <ul class="pagination justify-content-center">
+                            <li class="page-item disabled">
+                              <a class="page-link" href="#" aria-label="向前">
+                                <span aria-hidden="true">&laquo;</span>
+                                <span class="sr-only">向前</span>
+                              </a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">100</a></li>
+                            <li class="page-item"><a class="page-link" href="#">101</a></li>
+                            <li class="page-item">
+                              <a class="page-link" href="#" aria-label="向后">
+                                <span aria-hidden="true">&raquo;</span>
+                                <span class="sr-only">向后</span>
+                              </a>
+                            </li>
+                          </ul>
+                        </nav>
+
+                        <!-- 表格结束 -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    
+
+
+    <!-- =================================================脚本==================================================== -->
+    <script>
+        if (window.screen.availWidth >= 768) {
+            $('#contentId').collapse({
+                toggle: true
+            });
+        }
+
+        function toggle() {
+            /*
+             要操作Collapse中的某一个特定的card的时候，需要先获取到该card的card-body上一层的div的id
+             然后再通过执行collapse()配合 hide（关闭）、show（展开）、toggle（切换——结合了hide和show）
+            */
+            console.log("关闭关闭")
+            $('#section1ContentId').collapse('toggle');
+        }
+    </script>
+
+
+</body>
+</html>
