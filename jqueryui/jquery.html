@@ -22,10 +22,8 @@
     <div class="container">
         
         <div class="row mt-5">
-            <div class="col-md-2">
-                
-            </div>
-            <div class="col-md-8">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
                 <div class="form-group">
                   <label for="date">选择日期:</label>
                   <input type="text"
@@ -33,11 +31,19 @@
                   <small id="info4data" class="form-text text-muted">请选择日期</small>
                 </div>
             </div>
-            <div class="col-md-2">
-                
-            </div>
+            <div class="col-md-3"></div>
         </div>
 
+        <div class="row mt-2">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="progress">进度条:</label>
+                      <div id="progress"></div>
+                    </div>
+                </div>
+                <div class="col-md-3"></div>
+            </div>
     </div>
 
 
@@ -50,7 +56,10 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em"
         crossorigin="anonymous"></script>
     <script>
-        $( "#date" ).datepicker();
+        $( "#date" ).datepicker({showAnim: "blind"});
+        $("#progress").progressbar({
+            value:50,
+        });
     </script>
 </body>
 </html>
