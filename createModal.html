@@ -1,16 +1,19 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <title>createModal</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  </head>
-  <body>
-      
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+</head>
+
+<body>
+
     <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#newUser">
         Launch
     </button>
@@ -20,7 +23,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">新建用户</h4>
+                    <h4 class="modal-title">新建活动</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -28,93 +31,106 @@
                 <div class="modal-body">
                     <div class="container-fluid">
                         <div class="input-group input-group-sm mb-3">
+
                             <div class="input-group-prepend">
-                                <span class="input-group-text"><span class="glyphicon glyphicon-user"/></span>
+                                <span class="input-group-text">项目剩余积分</span>
                             </div>
-                            <input type="text" class="form-control" name="username" id="username">
+                            <input type="text" class="form-control" name="lastLaborCost" id="lastLaborCost" disabled="true">
+                        </div>
+                        <div class="input-group input-group-sm mb-3">
+
                             <div class="input-group-prepend">
-                                <span class="input-group-text">用户名</span>
+                                <span class="input-group-text">项目描述</span>
                             </div>
+                            <input type="text" class="form-control" name="description" id="description" disabled="true">
                         </div>
 
                         <div class="input-group input-group-sm mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><span class="glyphicon glyphicon-glass"/span>
-                                </div>
-                                <input type="text" class="form-control" name="sickname" id="sickname">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">昵称</span>
-                                </div>
+
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">活动名称</span>
+                            </div>
+                            <input type="text" class="form-control" name="name" id="name">
                         </div>
 
                         <div class="input-group input-group-sm mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">ID</span>
+                            <div class="input-group-append">
+                                <label class="input-group-text">报名限制</label>
                             </div>
-                            <input type="text" class="form-control" name="cardid" id="cardid">
+                            <select class="custom-select" id="type" name="type" onchange="listenType();">
+                                <option value="1" selected>开放报名</option>
+                                <option value="2">限定人数</option>
+                            </select>
+                        </div>
+                        <div class="input-group input-group-sm mb-3" hidden="true">
+
                             <div class="input-group-prepend">
-                                <span class="input-group-text">身份证</span>
+                                <span class="input-group-text">人数上限</span>
                             </div>
+                            <input type="number" class="form-control" min="1" value="1" name="baoMingUplimit" id="baoMingUplimit">
                         </div>
 
+                        <!--
+                            开始日期和时间
+                            myJS中要在前端判断用户所选择的日期必须是当前操作日期提前1天
+                            开始时间则确定了“可签到”的时间，一般为开始时间前30分钟~开始时间后15分钟的时间段内，提早和超时都不予签到
+                        -->
                         <div class="input-group input-group-sm mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><span class="glyphicon glyphicon-tint"/></span>
-                                </div>
-                                <select class="custom-select" id="sex" name="sex">
-                                  <option value="0" selected>请选择...</option>
-                                  <option value="1">男</option>
-                                  <option value="2">女</option>
-                                </select>
-                                <div class="input-group-append">
-                                  <label class="input-group-text">性别</label>
-                                </div>
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">开始日期</span>
+                            </div>
+                            <input type="date" class="form-control" min="20" name="activityBeginDate" id="activityBeginDate" onchange="listenActivityBeginTime();">
+                        </div>
+                        <div class="input-group input-group-sm mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">开始时间</span>
+                            </div>
+                            <input type="time" class="form-control" min="09:00" name="activityBeginTime" id="activityBeginTime" onchange="listenActivityBeginTime();">
                         </div>
 
+                        <!-- 
+                            持续时间表明活动从开始时间开始会持续多久
+                            持续时间记录了用户参加本次活动所累积的工作时长
+                            同时还确定了签退时间，也就是活动结束前30分钟到结束后1小时的时间段内，如果过时签退不予签退
+                            只有签退成功才能获得积分和积累工作时长
+                         -->
                         <div class="input-group input-group-sm mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><span class="glyphicon glyphicon-text-background"></span>
+                            <div class="input-group-append">
+                                <label class="input-group-text">持续时间</label>
                             </div>
-                            <input type="text" class="form-control" name="age" id="age">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">年龄</span>
-                            </div>
-                        </div>
-                           
-                        <div class="input-group input-group-sm mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><span class="glyphicon glyphicon-phone-alt"/></span>
-                            </div>
-                            <input type="text" class="form-control" name="phone" id="phone">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">电话</span>
-                            </div>
+                            <select class="custom-select" id="hour" name="hour" onchange="listenType();">
+                                <option value="1" selected>1小时</option>
+                                <option value="2">2小时</option>
+                                <option value="3">3小时</option>
+                                <option value="4">4小时</option>
+                                <option value="5">5小时</option>
+                                <option value="6">6小时</option>
+                                <option value="7">7小时</option>
+                                <option value="8">8小时</option>
+                                <option value="9">9小时</option>
+                                <option value="10">10小时</option>
+                            </select>
                         </div>
 
+                        <!-- 
+                            TODO
+                            原则上每个层级对象的“默认项目”所创建的活动没有积分的（disabled="true"属性添加到<input>标签），
+                            但当前是开发阶段，所以可以设置积分。
+                         -->
                         <div class="input-group input-group-sm mb-3">
+
                             <div class="input-group-prepend">
-                                <span class="input-group-text">@</span>
+                                <span class="input-group-text">积分值</span>
                             </div>
-                            <input type="text" class="form-control" name="email" id="email">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">E-mail</span>
-                            </div>
+                            <input type="number" min="0" class="form-control" name="score" id="score" value="0" >
                         </div>
-                        
-                        <div class="input-group input-group-sm mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><span class="glyphicon glyphicon-font"/></span>
-                            </div>
-                            <input type="text" class="form-control" name="sickname" id="sickname">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">地址</span>
-                            </div>
-                        </div>
+
+
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-primary">新建</button>
+                    <button type="button" class="btn btn-primary" onclick="getNumber();">新建</button>
                 </div>
             </div>
         </div>
@@ -124,8 +140,30 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  </body>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script>
+        function getNumber() {
+            alert("当前报名人数是：" + $("#baoMingUplimit").val());
+        }
+
+        function listenActivityBeginTime() {
+            alert("当前选取的时间是：" + $("#activityBeginDate").val());
+        }
+
+        function listenType() {
+            var type = $("#type").val();
+            if ('1' == type) {
+                $("#baoMingUplimit").parent().attr("hidden", true);
+            } else if ('2' == type) {
+                $("#baoMingUplimit").parent().attr("hidden", false);
+            }
+        }
+    </script>
+</body>
+
 </html>

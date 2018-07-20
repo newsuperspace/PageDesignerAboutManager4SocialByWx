@@ -1,0 +1,144 @@
+<html>
+<head>
+    <title>Struts Problem Report</title>
+    <style>
+    	pre {
+	    	margin: 0;
+	        padding: 0;
+	    }    
+    </style>
+</head>
+<body>
+    <h2>Struts Problem Report</h2>
+    <p>
+    Struts has detected an unhandled exception:
+    </p>
+
+
+<div id="exception-info">
+<table>
+    <tr>
+        <td><strong>Messages</strong>:</td>
+        <td>
+        </td>
+    </tr>
+    <tr>
+        <td><strong>File</strong>:</td>
+        <td>cc/natapp4/ddaig/action/AjaxAction4weixin.java</td>
+    </tr>
+    <tr>
+        <td><strong>Line number</strong>:</td>
+        <td>251</td>
+    </tr>
+    
+</table>
+</div>
+
+
+<div id="stacktraces">
+<hr />
+<h3>Stacktraces</h3>
+<div class="stacktrace" style="padding-left: 0em">
+    <strong>java.lang.NullPointerException</strong>
+    <div>
+    <pre>
+    cc.natapp4.ddaig.action.AjaxAction4weixin.preCheckRealName(AjaxAction4weixin.java:251)
+    sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+    sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+    sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+    java.lang.reflect.Method.invoke(Method.java:497)
+    ognl.OgnlRuntime.invokeMethod(OgnlRuntime.java:899)
+    ognl.OgnlRuntime.callAppropriateMethod(OgnlRuntime.java:1544)
+    ognl.ObjectMethodAccessor.callMethod(ObjectMethodAccessor.java:68)
+    com.opensymphony.xwork2.ognl.accessor.XWorkMethodAccessor.callMethodWithDebugInfo(XWorkMethodAccessor.java:98)
+    com.opensymphony.xwork2.ognl.accessor.XWorkMethodAccessor.callMethod(XWorkMethodAccessor.java:90)
+    ognl.OgnlRuntime.callMethod(OgnlRuntime.java:1620)
+    ognl.ASTMethod.getValueBody(ASTMethod.java:91)
+    ognl.SimpleNode.evaluateGetValueBody(SimpleNode.java:212)
+    ognl.SimpleNode.getValue(SimpleNode.java:258)
+    ognl.Ognl.getValue(Ognl.java:470)
+    ognl.Ognl.getValue(Ognl.java:434)
+    com.opensymphony.xwork2.ognl.OgnlUtil$3.execute(OgnlUtil.java:374)
+    com.opensymphony.xwork2.ognl.OgnlUtil.compileAndExecuteMethod(OgnlUtil.java:426)
+    com.opensymphony.xwork2.ognl.OgnlUtil.callMethod(OgnlUtil.java:372)
+    com.opensymphony.xwork2.DefaultActionInvocation.invokeAction(DefaultActionInvocation.java:438)
+    com.opensymphony.xwork2.DefaultActionInvocation.invokeActionOnly(DefaultActionInvocation.java:293)
+    com.opensymphony.xwork2.DefaultActionInvocation.invoke(DefaultActionInvocation.java:254)
+    cc.natapp4.ddaig.interceptor.AccessControlAllowOriginInterceptor.intercept(AccessControlAllowOriginInterceptor.java:43)
+    com.opensymphony.xwork2.DefaultActionInvocation.invoke(DefaultActionInvocation.java:249)
+    org.apache.struts2.interceptor.debugging.DebuggingInterceptor.intercept(DebuggingInterceptor.java:250)
+    com.opensymphony.xwork2.DefaultActionInvocation.invoke(DefaultActionInvocation.java:249)
+    com.opensymphony.xwork2.interceptor.DefaultWorkflowInterceptor.doIntercept(DefaultWorkflowInterceptor.java:179)
+    com.opensymphony.xwork2.interceptor.MethodFilterInterceptor.intercept(MethodFilterInterceptor.java:99)
+    com.opensymphony.xwork2.DefaultActionInvocation.invoke(DefaultActionInvocation.java:249)
+    com.opensymphony.xwork2.validator.ValidationInterceptor.doIntercept(ValidationInterceptor.java:263)
+    org.apache.struts2.interceptor.validation.AnnotationValidationInterceptor.doIntercept(AnnotationValidationInterceptor.java:49)
+    com.opensymphony.xwork2.interceptor.MethodFilterInterceptor.intercept(MethodFilterInterceptor.java:99)
+    com.opensymphony.xwork2.DefaultActionInvocation.invoke(DefaultActionInvocation.java:249)
+    com.opensymphony.xwork2.interceptor.ConversionErrorInterceptor.doIntercept(ConversionErrorInterceptor.java:142)
+    com.opensymphony.xwork2.interceptor.MethodFilterInterceptor.intercept(MethodFilterInterceptor.java:99)
+    com.opensymphony.xwork2.DefaultActionInvocation.invoke(DefaultActionInvocation.java:249)
+    com.opensymphony.xwork2.interceptor.ParametersInterceptor.doIntercept(ParametersInterceptor.java:137)
+    com.opensymphony.xwork2.interceptor.MethodFilterInterceptor.intercept(MethodFilterInterceptor.java:99)
+    com.opensymphony.xwork2.DefaultActionInvocation.invoke(DefaultActionInvocation.java:249)
+    com.opensymphony.xwork2.interceptor.ParametersInterceptor.doIntercept(ParametersInterceptor.java:137)
+    com.opensymphony.xwork2.interceptor.MethodFilterInterceptor.intercept(MethodFilterInterceptor.java:99)
+    com.opensymphony.xwork2.DefaultActionInvocation.invoke(DefaultActionInvocation.java:249)
+    com.opensymphony.xwork2.interceptor.StaticParametersInterceptor.intercept(StaticParametersInterceptor.java:201)
+    com.opensymphony.xwork2.DefaultActionInvocation.invoke(DefaultActionInvocation.java:249)
+    org.apache.struts2.interceptor.MultiselectInterceptor.intercept(MultiselectInterceptor.java:67)
+    com.opensymphony.xwork2.DefaultActionInvocation.invoke(DefaultActionInvocation.java:249)
+    org.apache.struts2.interceptor.DateTextFieldInterceptor.intercept(DateTextFieldInterceptor.java:133)
+    com.opensymphony.xwork2.DefaultActionInvocation.invoke(DefaultActionInvocation.java:249)
+    org.apache.struts2.interceptor.CheckboxInterceptor.intercept(CheckboxInterceptor.java:89)
+    com.opensymphony.xwork2.DefaultActionInvocation.invoke(DefaultActionInvocation.java:249)
+    org.apache.struts2.interceptor.FileUploadInterceptor.intercept(FileUploadInterceptor.java:243)
+    com.opensymphony.xwork2.DefaultActionInvocation.invoke(DefaultActionInvocation.java:249)
+    com.opensymphony.xwork2.interceptor.ModelDrivenInterceptor.intercept(ModelDrivenInterceptor.java:101)
+    com.opensymphony.xwork2.DefaultActionInvocation.invoke(DefaultActionInvocation.java:249)
+    com.opensymphony.xwork2.interceptor.ScopedModelDrivenInterceptor.intercept(ScopedModelDrivenInterceptor.java:142)
+    com.opensymphony.xwork2.DefaultActionInvocation.invoke(DefaultActionInvocation.java:249)
+    com.opensymphony.xwork2.interceptor.ChainingInterceptor.intercept(ChainingInterceptor.java:160)
+    com.opensymphony.xwork2.DefaultActionInvocation.invoke(DefaultActionInvocation.java:249)
+    com.opensymphony.xwork2.interceptor.PrepareInterceptor.doIntercept(PrepareInterceptor.java:175)
+    com.opensymphony.xwork2.interceptor.MethodFilterInterceptor.intercept(MethodFilterInterceptor.java:99)
+    com.opensymphony.xwork2.DefaultActionInvocation.invoke(DefaultActionInvocation.java:249)
+    org.apache.struts2.interceptor.I18nInterceptor.intercept(I18nInterceptor.java:121)
+    com.opensymphony.xwork2.DefaultActionInvocation.invoke(DefaultActionInvocation.java:249)
+    org.apache.struts2.interceptor.ServletConfigInterceptor.intercept(ServletConfigInterceptor.java:167)
+    com.opensymphony.xwork2.DefaultActionInvocation.invoke(DefaultActionInvocation.java:249)
+    com.opensymphony.xwork2.interceptor.AliasInterceptor.intercept(AliasInterceptor.java:203)
+    com.opensymphony.xwork2.DefaultActionInvocation.invoke(DefaultActionInvocation.java:249)
+    com.opensymphony.xwork2.interceptor.ExceptionMappingInterceptor.intercept(ExceptionMappingInterceptor.java:196)
+    com.opensymphony.xwork2.DefaultActionInvocation.invoke(DefaultActionInvocation.java:249)
+    org.apache.struts2.factory.StrutsActionProxy.execute(StrutsActionProxy.java:48)
+    org.apache.struts2.dispatcher.Dispatcher.serviceAction(Dispatcher.java:574)
+    org.apache.struts2.dispatcher.ExecuteOperations.executeAction(ExecuteOperations.java:79)
+    org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter.doFilter(StrutsPrepareAndExecuteFilter.java:141)
+    org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+    org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+    org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:61)
+    org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:108)
+    org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:137)
+    org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+    org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:66)
+    org.apache.shiro.web.servlet.AbstractShiroFilter.executeChain(AbstractShiroFilter.java:449)
+    org.apache.shiro.web.servlet.AbstractShiroFilter$1.call(AbstractShiroFilter.java:365)
+    org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90)
+    org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83)
+    org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:387)
+    org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:362)
+    org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+    org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:346)
+    org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:262)
+    cc.natapp4.ddaig.security.MyShiroFilter.doFilter(MyShiroFilter.java:56)
+    org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+    org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+    org.springframework.orm.hibernate5.support.OpenSessionInViewFilter.doFilterInternal(OpenSessionInViewFilter.java:151)
+    org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+    org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+    org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+    org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:199)
+    org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+    org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:494)
+    org.apache.catalina.core.StandardHostValve…

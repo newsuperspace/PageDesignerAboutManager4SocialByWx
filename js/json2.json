@@ -1,0 +1,23 @@
+{
+    "description": "通用权限",
+    "permissionLevelName": "all",
+    "level": 10086,
+    "enabled": true,
+    "permissionTypes": [{
+            "description": "系统后台",
+            "permissionTypeName": "system",
+            "enabled": true,
+            "permissions": [{
+                    "description": "桌面端访问",
+                    "permissionName": "access4desk",
+                    "enabled": true
+                },
+                {
+                    "description": "微信端访问",
+                    "permissionName": "access4weixin",
+                    "enabled": true
+                }
+            ]
+        }
+    ]
+}
