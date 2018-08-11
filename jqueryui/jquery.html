@@ -24,7 +24,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="name">活动名称:</label>
-                    <input type="text" class="form-control" name="name" id="name">
+                    <input type="text" class="form-control" name="name" id="name" onchange="checkInput();">
                     <small id="info4name" class="form-text text-muted" hidden="true">必填</small>
                 </div>
             </div>
@@ -36,7 +36,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="description">活动内容:</label>
-                    <input type="text" class="form-control" name="description" id="description">
+                    <input type="text" class="form-control" name="description" id="description" onchange="checkInput();">
                     <small id="info4description" class="form-text text-muted" hidden="true">必填</small>
                 </div>
             </div>
@@ -48,7 +48,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="type">名额限制:</label>
-                    <select class="custom-select" id="type" name="type" onchange="listenType();">
+                    <select class="custom-select" id="type" name="type" onchange="listenType();checkInput();">
                         <option value="1" selected>开放报名</option>
                         <option value="2">限定人数</option>
                     </select>
@@ -62,8 +62,8 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="baoMingUplimit">设置人数:</label>
-                    <input type="number" class="form-control" min="1" value="1" name="baoMingUplimit" id="baoMingUplimit">
-                    <small id="info4baoMingUplimit" class="form-text text-muted" hidden="true">每次活动人数不得少于1</small>
+                    <input type="number" class="form-control" min="1" value="1" name="baoMingUplimit" id="baoMingUplimit" onchange="checkInput();">
+                    <small id="info4baoMingUplimit" class="form-text text-muted" hidden="false" style="color:red">每次活动人数不得少于1</small>
                 </div>
             </div>
             <div class="col-md-3"></div>
@@ -79,8 +79,8 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="date">选择日期:</label>
-                    <input type="text" class="form-control" name="date" id="date" aria-describedby="info4date" placeholder="选择日期">
-                    <small id="info4date" class="form-text text-muted" hidden="true">必填，单击输入框选择日期和时间</small>
+                    <input type="text" class="form-control" name="date" id="date" aria-describedby="info4date" placeholder="选择日期" onchange="checkInput();">
+                    <small id="info4date"  style="color: red" class="form-text text-muted" >必填，单击输入框选择日期和时间</small>
                 </div>
             </div>
             <div class="col-md-3"></div>
@@ -97,9 +97,9 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="hour">活动时长(小时):
-                        <input type="text" value="1" id="hourInput" style="border:0; color:#f6931f; font-weight:bold; font-size: 17px">
+                        <input type="text" value="1" id="hour" onchange="checkHour(this);checkInput();" style="border:0; color:#f6931f; font-weight:bold; font-size: 17px">
                     </label>
-                    <div id="hour" name="hour"></div>
+                    <div id="hourBar" name="hourBar"></div>
                     <small id="info4hour" class="form-text text-muted" hidden="true">默认活动时常为1小时</small>
                 </div>
             </div>
@@ -111,7 +111,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="score">积分值:</label>
-                    <input type="number" min="0" class="form-control" name="score" id="score" value="0">
+                    <input type="number" min="0" class="form-control" name="score" id="score" value="0" onchange="checkInput();">
                     <small id="info4score" class="form-text text-muted" hidden="true">签到后获取的积分</small>
                 </div>
             </div>
@@ -121,7 +121,7 @@
         <div class="row mb-5">
             <div class="col-md-3"></div>
             <div class="col-md-6">
-                <button type="button " name="commit" id="commit" class="btn btn-primary btn-lg btn-block">发起活动</button>
+                <button type="button " name="commit" id="commit" disabled="true" class="btn btn-primary btn-lg btn-block">发起活动</button>
             </div>
             <div class="col-md-3"></div>
         </div>
@@ -155,14 +155,24 @@
             });
 
             // 设置活动时间的滚动条
-            $("#hour").slider({
-                range: true,
+            $("#hourBar").slider({
+                range: false,   // 如果设置成true就会出现前后两个滑块
                 min: 1, // 最小值为1（小时）
                 max: 12, // 最大值为12（小时）
                 change: function (event) {
+                    // 获取滑块儿的jQuery对象，因为event.target是出发当前回调方法的DOM对象（一个div），因此需要先转化成jQuery对象，才能调用jQuery的API
+                    var $hourBar = $(event.target);
                     // 当滚动条被波动时，出发本回调，设置显示的数值
-                    var hour = $(event.target).slider("values")[1];
-                    $("#hourInput").val(hour);
+                    /* 
+                        如果设置的range为true，则此处虎丘两个滑块儿的值的时候应该使用values，
+                        返回一个数组index=0为第一个滑块儿的数值；index=1为第二个滑块儿的数值
+                    */
+                    // var hour = $(event.target).slider("values")[1];
+                    /* 
+                        而如果range为false，则只有一个滑块儿，因此直接使用value就能获取到这个滑块儿的数值了。
+                    */
+                   var hour = $hourBar.slider("value");
+                    $("#hour").val(hour);
                 },
 
             });
@@ -170,6 +180,22 @@
             // 由于默认活动参与人数不设限制，因此在刚刚载入页面的时候需要预先隐藏baoMingUplimit
             $("#baoMingUplimit").parent().attr("hidden",true);
         });
+
+        function checkInput(){
+            let aflag = true;
+            $("input").each(function(){
+                if($(this).val()==""){
+                    aflag=false;
+                }
+            });
+            if(aflag){
+                $("#commit").attr("disabled",false);
+            }else{
+                $("#commit").attr("disabled",true);
+            }
+        }
+
+
 
         function listenType() {
             var type = $("#type").val();
@@ -179,6 +205,29 @@
                 $("#baoMingUplimit").parent().attr("hidden", false);
             }
         }
+
+        // 校验函数——校验id=hour的input的值是否在1~12之间
+		function checkHour(self){
+			
+			var $hourInput = $(self);
+			/*
+			 * 然后再将数字字符串转变为真正的Number类型的数值
+			 * 需要注意的是，如果hour.val()不是数字字符串而是字符，则转化后的是NaN
+			 * 因此为了保险起见，我们通过 "parseInt(hour.val())||1"的形式来获取数值
+			 * 因为如果parseInt(hour.val()) 是 NaN/Null/undefined 则就会默认为1
+			 * 否则才是parseInt(hour.val())的本值，这是一个JS中的常用技巧★★
+			 */ 
+			var hour =  parseInt($hourInput.val()) || 1;
+			// 然后判断hour是否在1~12之间
+			if(hour<1){
+				hour = 1;
+			}else if(hour>12){
+				hour = 12;
+            }
+            console.log("当前hour的值被修正成："+hour);
+            $hourInput.val(hour);
+            $("#hourBar").slider("value",hour);
+		}
     </script>
 </body>
 

@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>测试WeUI</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/1.1.3/weui.min.css">
+</head>
+
+<body>
+
+  <div class="weui-tab" id="tab">
+    <div class="weui-navbar">
+      <div class="weui-navbar__item">调用weui.js</div>
+      <div class="weui-navbar__item">weui的html</div>
+      <div class="weui-navbar__item">footer样式</div>
+      <div class="weui-navbar__item">图片上传</div>
+    </div>
+    <div class="weui-tab__panel">
+      <!--第一页-->
+      <div class="weui-tab__content">
+        <a href="javascript:showDialog1();" class="weui-btn weui-btn_primary">弹出HTMLdialog</a>
+        <a href="javascript:showDialog();" class="weui-btn weui-btn_warn">弹出weui.js构筑的dialog</a>
+
+        <a href="javascript:showAlert();" class="weui-btn weui-btn_default">weui.js触发普通alert()</a>
+        <a href="javascript:showAlert2();" class="weui-btn weui-btn_primary">weui.js触发自定义alert()</a>
+
+        <a href="javascript:showActionSheet();" class="weui-btn weui-btn_warn">弹出weui.js构筑的ActionSheet</a>
+
+        <a href="javascript:loading();" class="weui-btn weui-btn_default">显示loading</a>
+
+        <a href="javascript:gallery();" class="weui-btn weui-btn_primary">显示gallery</a>
+        <a href="javascript:toast();" class="weui-btn weui-btn_warn">显示toast</a>
+        <a href="javascript:toptip();" class="weui-btn weui-btn_default">显示toptip</a>
+
+        <a href="javascript:;" class="weui-btn weui-btn_primary"></a>
+        <a href="javascript:;" class="weui-btn weui-btn_warn"></a>
+        <a href="javascript:;" class="weui-btn weui-btn_default"></a>
+      </div>
+      <!--第二页-->
+      <div class="weui-tab__content">
+
+        <div id="dialog1" style="display: none;">
+          <div class="weui-mask"></div>
+          <div class="weui-dialog">
+            <div class="weui-dialog__hd">
+              <strong class="weui-dialog__title">弹窗标题</strong>
+            </div>
+            <div class="weui-dialog__bd">弹窗内容，告知当前状态、信息和解决方法，描述文字尽量控制在三行内</div>
+            <div class="weui-dialog__ft">
+              <a href="javascript:alert('取消');" class="weui-dialog__btn weui-dialog__btn_default">辅助操作</a>
+              <a href="javascript:alert('取消');" class="weui-dialog__btn weui-dialog__btn_primary">主操作</a>
+              <a href="javascript:alert('取消');" class="weui-dialog__btn weui-dialog__btn_primary">主操作2</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="weui-search-bar" id="searchBar">
+          <form class="weui-search-bar__form">
+            <div class="weui-search-bar__box">
+              <i class="weui-icon-search"></i>
+              <input type="search" class="weui-search-bar__input" placeholder="搜索" required="">
+              <a href="javascript:" class="weui-icon-clear"></a>
+            </div>
+            <label class="weui-search-bar__label">
+              <i class="weui-icon-search"></i>
+              <span>搜索</span>
+            </label>
+          </form>
+          <a href="javascript:" class="weui-search-bar__cancel-btn">取消</a>
+        </div>
+
+        <div class="weui-slider-box">
+          <div id="slider" class="weui-slider">
+            <div class="weui-slider__inner">
+              <div class="weui-slider__track"></div>
+              <div class="weui-slider__handler"></div>
+            </div>
+          </div>
+          <div id="sliderValue" class="weui-slider-box__value"></div>
+        </div>
+      </div>
+      <!--第三页-->
+      <div class="weui-tab__content">
+
+        <div class="weui-footer" style="height: 100px;width: 100%;background-color: #ddd;position: fixed;bottom: 0;">
+          <p class="weui-footer__text">Copyright &copy; 2008-2016 weui.io</p>
+        </div>
+
+        <div class="weui-footer" style="height: 100px;width: 100%;background-color: #ddd;position: fixed;bottom: 0;">
+          <p class="weui-footer__links">
+            <a href="javascript:void(0);" class="weui-footer__link">底部链接</a>
+          </p>
+          <p class="weui-footer__text">Copyright &copy; 2008-2016 weui.io</p>
+        </div>
+
+        <div class="weui-footer" style="height: 100px;width: 100%;background-color: #ddd;position: fixed;bottom: 0;">
+          <p class="weui-footer__links">
+            <a href="javascript:void(0);" class="weui-footer__link">底部链接</a>
+            <a href="javascript:void(0);" class="weui-footer__link">底部链接</a>
+          </p>
+          <p class="weui-footer__text">Copyright &copy; 2008-2016 weui.io</p>
+        </div>
+
+        <div class="weui-footer weui-footer_fixed-bottom" style="height: 100px;width: 100%;background-color: #ddd;position: fixed;bottom: 0;">
+          <p class="weui-footer__links">
+            <a href="javascript:home();" class="weui-footer__link">WeUI首页</a>
+          </p>
+          <p class="weui-footer__text">Copyright &copy; 2008-2016 weui.io</p>
+        </div>
+
+      </div>
+      <!--第四页-->
+      <div class="weui-tab__content">
+        <!--这是upload图片上传的结构整体-->
+        <div class="weui-cells weui-cells_form" id="uploader">
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <!--这是图片上传的结构中心-->
+              <div class="weui-uploader">
+                <!--标题部分-->
+                <div class="weui-uploader__hd">
+                  <p class="weui-uploader__title">图片上传</p>
+                  <div class="weui-uploader__info">
+                    <span id="uploadCount">0</span>/5</div>
+                </div>
+                <!--正文部分-->
+                <div class="weui-uploader__bd">
+                  <!--图片列表-->
+                  <ul class="weui-uploader__files" id="uploaderFiles">
+                    <li data-mediaid="http://www.runoob.com/try/weui/example/snapshot/dialog2.png" class="weui-uploader__file" style="background-image:url(http://www.runoob.com/try/weui/example/snapshot/dialog2.png)"></li>
+                    <li data-mediaid="http://www.runoob.com/try/weui/example/snapshot/dialog2.png" class="weui-uploader__file" style="background-image:url(http://www.runoob.com/try/weui/example/snapshot/dialog2.png)"></li>
+                    <li data-mediaid="http://www.runoob.com/try/weui/example/snapshot/dialog2.png" class="weui-uploader__file" style="background-image:url(http://www.runoob.com/try/weui/example/snapshot/dialog2.png)"></li>
+                    <li class="weui-uploader__file weui-uploader__file_status" style="background-image:url(./images/pic_160.png)">
+                      <div class="weui-uploader__file-content">
+                        <i class="weui-icon-warn"></i>
+                      </div>
+                    </li>
+                    <li class="weui-uploader__file weui-uploader__file_status" style="background-image:url(./images/pic_160.png)">
+                      <div class="weui-uploader__file-content">50%</div>
+                    </li>
+                  </ul>
+                  <!--上传触发按钮-->
+                  <div class="weui-uploader__input-box">
+                    <input id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*" multiple />
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  </div>
+
+
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em"
+    crossorigin="anonymous"></script>
+  <script type="text/javascript" src="https://res.wx.qq.com/open/libs/weuijs/1.1.4/weui.min.js"></script>
+  <script type="text/javascript" src="js/weui4me.js"></script>
+  <script type="text/javascript">
+    // 初始化搜索框
+    weui.searchBar('#searchBar');
+    // 初始化滑条
+    weui.slider('#slider', {
+      step: 10,
+      defaultValue: 40,
+      onChange: function (percent) {
+        console.log(percent);
+      }
+    });
+    // 初始化tab页
+    weui.tab('#tab', {
+      defaultIndex: 0,
+      onChange: function (index) {
+        console.log(index);
+      }
+    });
+
+    // 初始化
+    $(function(){
+      // 初始化图片上传的图片预览功能，点击已经上传的图片就能打开gallary放大查看图片并且有删除功能
+      $(".weui-uploader__file").unbind().bind("click",function(event){
+        gallery(event.target);
+      });
+      // 
+
+      
+
+    });
+
+
+  </script>
+</body>
+
+</html>

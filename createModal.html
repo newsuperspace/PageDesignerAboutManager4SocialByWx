@@ -14,6 +14,14 @@
 
 <body>
 
+    <div class="form-group">
+      <label for="number4aaa">aaa</label>
+      <input type="number"
+        class="form-control" name="number4aaa" id="number4aaa" placeholder="aaa">
+    </div>
+    <a name="aaa" id="aaa" class="btn btn-danger" href="#" role="button" onclick="parse();">aaa</a>    
+
+
     <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#newUser">
         Launch
     </button>
@@ -154,6 +162,12 @@
         function listenActivityBeginTime() {
             alert("当前选取的时间是：" + $("#activityBeginDate").val());
         }
+
+        function parse(){
+            var number = $("#number4aaa").val();
+            alert(parseInt(number)||-1);
+        }
+
 
         function listenType() {
             var type = $("#type").val();
