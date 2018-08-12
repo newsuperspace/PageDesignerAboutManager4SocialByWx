@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>活动历史</title>
+    <title>已报名的活动列表</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -26,18 +26,14 @@
             <!--这是一个preView，用来展示一个活动信息-->
             <div class="weui-form-preview mt-2">
                 <!--头-->
-                <!-- <div class="weui-form-preview__hd">
+                <div class="weui-form-preview__hd">
                     <div class="weui-form-preview__item">
                         <label class="weui-form-preview__label">活动名称</label>
-                        <em class="weui-form-preview__value">呼家楼街道核桃园社区创享计划说明会</em>
+                        <em class="weui-form-preview__value" id="name">呼家楼街道核桃园社区创享计划说明会</em>
                     </div>
-                </div> -->
+                </div>
                 <!--体-->
                 <div class="weui-form-preview__bd">
-                    <div class="weui-form-preview__item">
-                        <label class="weui-form-preview__label">活动名称</label>
-                        <span class="weui-form-preview__value" id="name">呼家楼街道核桃园社区创享计划说明会</span>
-                    </div>
                     <div class="weui-form-preview__item">
                         <label class="weui-form-preview__label">发起方</label>
                         <span class="weui-form-preview__value" id="initiator">核桃园社区</span>
@@ -51,21 +47,25 @@
                         <span class="weui-form-preview__value" id=”description“>很长很长的名字很长很长的名字很长很长的名字很长很长的名字很长很长的名字</span>
                     </div>
                     <!-- <div class="weui-form-preview__item">
-                                        <label class="weui-form-preview__label">活动地点</label>
-                                        <span class="weui-form-preview__value" id="place">核桃园社区会议室</span>
-                                    </div> -->
+                                <label class="weui-form-preview__label">活动地点</label>
+                                <span class="weui-form-preview__value" id="place">核桃园社区会议室</span>
+                            </div> -->
                     <div class="weui-form-preview__item">
                         <label class="weui-form-preview__label">活动积分</label>
                         <span class="weui-form-preview__value" id="score">0</span>
                     </div>
                     <div class="weui-form-preview__item">
-                        <label class="weui-form-preview__label">您的表现</label>
+                        <label class="weui-form-preview__label">活动状态</label>
                         <span class="weui-form-preview__value" id="limit">
                             <!--badge-primary|secondary|success|danger|warning|info|light|dark-->
-                            <span class="badge badge-secondary">未参加</span>
-                            <span class="badge badge-success">完成任务</span>
+                            <span class="badge badge-primary">筹办中</span>
                         </span>
                     </div>
+                </div>
+                <!--足-->
+                <div class="weui-form-preview__ft">
+                    <!-- <a class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:">取消报名</a> -->
+                    <button onclick="cancelBaoming('aid=123');" type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:">取消报名</button>
                 </div>
             </div>
 
@@ -73,8 +73,6 @@
 
         </div>
     </div>
-
-
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -84,6 +82,32 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em"
         crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://res.wx.qq.com/open/libs/weuijs/1.1.4/weui.min.js"></script>
+    <script>
+        function cancelBaoming(aid) {
+            weui.confirm('自定义按钮的confirm', {
+                title: '是否取消报名？',
+                content: "报名取消后，活动信息会移回可报名活动列表",
+                buttons: [{
+                    label: '再想想',
+                    type: 'default',
+                    onClick: function () {
+                        alert('不取消了');
+                    }
+                }, {
+                    label: '狠心取消',
+                    type: 'primary',
+                    onClick: function () {
+                        // 执行报名逻辑ajax操作
+                        alert('取消报名的活动AID是' + aid);
+                    }
+                }]
+            });
+
+        }
+    </script>
+
+
+
 </body>
 
 </html>
