@@ -69,7 +69,7 @@
                 <span class="weui-label" style="vertical-align: middle">姓名</span>
             </div> -->
             <div class="weui-cell__bd">
-                    <input class="weui-input" type="date" value="" />
+                    <input id="datePicker" class="weui-input" type="text" value="" />
             </div>
         </div>
     </div>
@@ -90,14 +90,57 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em"
         crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://res.wx.qq.com/open/libs/weuijs/1.1.4/weui.min.js"></script>
-    <style type="text/css">
-        .weui_avatar {
-            width: 52px;
-            height: 52px;
-            border-radius: 4px;
-            vertical-align: middle
-        }
-    </style>
+    <script>
+        
+    $('#showPicker').on('click', function () {
+        weui.picker([{
+            label: '飞机票',
+            value: 0
+        }, {
+            label: '火车票',
+            value: 1
+        }, {
+            label: '的士票',
+            value: 2
+        },{
+            label: '公交票 (disabled)',
+            disabled: true,
+            value: 3
+        }, {
+            label: '其他',
+            value: 4
+        }], {
+            onChange: function (result) {
+                console.log(result);
+            },
+            onConfirm: function (result) {
+                console.log(result);
+            }
+        });
+    });
+    $('#datePicker').on('focus', function () {
+        weui.datePicker({
+            start: "1900-1-1",
+            end: new Date(),
+            defaultValue:  [1980, 7, 15],
+            onChange: function (result) {
+                console.log(result);
+            },
+            onConfirm: function (result) {
+                let birth = "";
+                for(let i=0;i<result.length;i++){
+                    console.log(result[i].value);
+                    birth += result[i].value;
+                    if((i+1)!=result.length){
+                        birth += "-";
+                    }
+                }
+                console.log(birth);
+                $("#datePicker").val(birth);
+            }
+        });
+    });
+    </script>
 </body>
 
 </html>
