@@ -35,7 +35,7 @@
                 <span style="vertical-align: middle">男</span>
             </div>
             <div class="weui-cell__ft">
-                <input type="radio" class="weui-check" name="radio1" id="x11" checked="checked">
+                <input type="radio" class="weui-check" name="radio1" id="x11" value="1" checked="checked">
                 <span class="weui-icon-checked"></span>
             </div>
         </label>
@@ -44,7 +44,7 @@
                 <span style="vertical-align: middle">女</span>
             </div>
             <div class="weui-cell__ft">
-                <input type="radio" name="radio1" class="weui-check" id="x12">
+                <input type="radio" name="radio1" class="weui-check" value="2" id="x12">
                 <span class="weui-icon-checked"></span>
             </div>
         </label>
@@ -61,7 +61,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="weui-cells__title">您的生日是？</div>
     <div class="weui-cells weui-cells_form">
         <div class="weui-cell">
@@ -69,14 +69,14 @@
                 <span class="weui-label" style="vertical-align: middle">姓名</span>
             </div> -->
             <div class="weui-cell__bd">
-                    <input id="datePicker" class="weui-input" type="text" value="" />
+                <input id="datePicker" class="weui-input" type="text" value="" />
             </div>
         </div>
     </div>
 
     <div class="weui-cells__tips">底部说明文字底部说明文字</div>
 
-    <a href="javascript:;" class="weui-btn  weui-btn_primary mt-2">确认</a>
+    <a href="javascript:getRaidoValue();" class="weui-btn  weui-btn_primary mt-2">确认</a>
 
 
 
@@ -90,56 +90,63 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em"
         crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://res.wx.qq.com/open/libs/weuijs/1.1.4/weui.min.js"></script>
-    <script>
-        
-    $('#showPicker').on('click', function () {
-        weui.picker([{
-            label: '飞机票',
-            value: 0
-        }, {
-            label: '火车票',
-            value: 1
-        }, {
-            label: '的士票',
-            value: 2
-        },{
-            label: '公交票 (disabled)',
-            disabled: true,
-            value: 3
-        }, {
-            label: '其他',
-            value: 4
-        }], {
-            onChange: function (result) {
-                console.log(result);
-            },
-            onConfirm: function (result) {
-                console.log(result);
-            }
-        });
-    });
-    $('#datePicker').on('focus', function () {
-        weui.datePicker({
-            start: "1900-1-1",
-            end: new Date(),
-            defaultValue:  [1980, 7, 15],
-            onChange: function (result) {
-                console.log(result);
-            },
-            onConfirm: function (result) {
-                let birth = "";
-                for(let i=0;i<result.length;i++){
-                    console.log(result[i].value);
-                    birth += result[i].value;
-                    if((i+1)!=result.length){
-                        birth += "-";
-                    }
+    <script>    
+
+        function getRaidoValue(){
+
+            var value = $('input[name="radio1"]:checked').val();
+            weui.alert(value);
+        }
+
+
+        $('#showPicker').on('click', function () {
+            weui.picker([{
+                label: '飞机票',
+                value: 0
+            }, {
+                label: '火车票',
+                value: 1
+            }, {
+                label: '的士票',
+                value: 2
+            }, {
+                label: '公交票 (disabled)',
+                disabled: true,
+                value: 3
+            }, {
+                label: '其他',
+                value: 4
+            }], {
+                onChange: function (result) {
+                    console.log(result);
+                },
+                onConfirm: function (result) {
+                    console.log(result);
                 }
-                console.log(birth);
-                $("#datePicker").val(birth);
-            }
+            });
         });
-    });
+        $('#datePicker').on('focus', function () {
+            weui.datePicker({
+                start: "1900-1-1",
+                end: new Date(),
+                defaultValue: [1980, 7, 15],
+                onChange: function (result) {
+                    console.log(result);
+                },
+                onConfirm: function (result) {
+                    let birth = "";
+                    for (let i = 0; i < result.length; i++) {
+                        console.log(result[i].value);
+                        birth += result[i].value;
+                        if ((i + 1) != result.length) {
+                            birth += "-";
+                        }
+                    }
+                    console.log(birth);
+                    $("#datePicker").val(birth);
+                }
+            });
+        });
     </script>
 </body>
 
