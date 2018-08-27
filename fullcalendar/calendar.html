@@ -30,7 +30,7 @@
     </div>
 
 
-    <a name="agendaDay" id="agendaDay" class="btn btn-success" href="#" onclick="getDate();" role="button">agendaDay</a>
+    <a name="agendaDay" id="agendaDay" class="btn btn-success" href="#" onclick="addEvent();" role="button">agendaDay</a>
 
 
 
@@ -52,132 +52,169 @@
             alert("The current date of the calendar is " + moment.format('YYYY-MM-DD HH:MM:SS'));
         }
 
+        // 通过本方法的演示可以直接将从本地服务器返回的JSON数据放入到日历中显示出来
+        function addEvent() {
+            let url = "http://ddaig.nat200.top/grow/tryAction_getEventSources.action";
+            let param = {
+
+            }
+            $.post(url, param, function (data, textStatus, req) {
+                console.log("AJAX通讯正常");
+                $('#calendar').fullCalendar('addEventSource', data)
+            });
+        }
+
+
         $(function () {
-                    $('#calendar').fullCalendar({
-                            // 你的选项配置和回调函数
-                            // 设置日历的主题风格，这里选用了bootstrap3风格
-                            themeSystem: 'bootstrap3',
-                            // 当使用Bootstrap风格时，设置header部分的按钮图标。
-                            bootstrapGlyphicons: {
-                                close: 'glyphicon-remove',
-                                prev: 'glyphicon-chevron-left',
-                                next: 'glyphicon-chevron-right',
-                                prevYear: 'glyphicon-backward',
-                                nextYear: 'glyphicon-forward'
-                            },
-                            // 设置每周第一天，数字int型，默认0（周日）
-                            firstDay: 1,
+            $('#calendar').fullCalendar({
+                // 你的选项配置和回调函数
+                // 设置日历的主题风格，这里选用了bootstrap3风格
+                themeSystem: 'bootstrap3',
+                // 当使用Bootstrap风格时，设置header部分的按钮图标。
+                bootstrapGlyphicons: {
+                    close: 'glyphicon-remove',
+                    prev: 'glyphicon-chevron-left',
+                    next: 'glyphicon-chevron-right',
+                    prevYear: 'glyphicon-backward',
+                    nextYear: 'glyphicon-forward'
+                },
+                // 设置每周第一天，数字int型，默认0（周日）
+                firstDay: 1,
 
-                            // 设置页面上方的按钮阵列
-                            header: {
-                                left: 'prev,next today myCustomButton',
-                                center: 'title',
-                                right: 'month,agendaWeek,agendaDay,listWeek'
-                            },
-                            // 自定义按钮集合，这些按钮可以显示在header或footer上
-                            customButtons: {
-                                myCustomButton: {
-                                    text: '自定义按钮',
-                                    click: function () {
-                                        weui.alert('点击了自定义按钮!');
-                                    },
+                // 设置页面上方的按钮阵列
+                header: {
+                    left: 'prev,next today myCustomButton',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay,agendaFourDay'
+                },
+                // 自定义按钮集合，这些按钮可以显示在header或footer上
+                customButtons: {
+                    myCustomButton: {
+                        text: '自定义按钮',
+                        click: function () {
+                            weui.alert('点击了自定义按钮!');
+                        },
 
-                                }
-                            },
-                            // 按钮阵列中显示的按钮的中文文本（不设置buttonText，则默认显示英文或符号）
-                            buttonText: {
-                                month: '月',
-                                week: '周',
-                                day: '日',
-                                prev: '上月',
-                                next: '下月',
-                                today: '今天',
-                                listWeek: '周列',
-                                monday: '周一',
-                            },
-                            // 用来显示是否在日历上显示周六和周日，默认为true表示显示
-                            weekends: true,
-                            // 在日历中不显示一周中的某几天，数组形式，从0-6分别表示周日（Sunday）-周一（Monday）
-                            hiddenDays: [],
-                            // 设置月试图时显示的周数，默认true。如果是true则每次固定显示6周，如果设置为false，则每月根据实际周数显示4，5，6周。
-                            fixedWeekCount: false,
-                            // 是否显示周序号（一年有52个周）
-                            weekNumbers: true,
+                    }
+                },
+                // 按钮阵列中显示的按钮的中文文本（不设置buttonText，则默认显示英文或符号）
+                buttonText: {
+                    month: '月',
+                    week: '周',
+                    day: '日',
+                    prev: '上月',
+                    next: '下月',
+                    today: '今天',
+                    listWeek: '周列',
+                    monday: '周一',
+                },
+                // 用来显示是否在日历上显示周六和周日，默认为true表示显示
+                weekends: true,
+                // 在日历中不显示一周中的某几天，数组形式，从0-6分别表示周日（Sunday）-周一（Monday）
+                hiddenDays: [],
+                // 设置月试图时显示的周数，默认true。如果是true则每次固定显示6周，如果设置为false，则每月根据实际周数显示4，5，6周。
+                fixedWeekCount: false,
+                // 是否显示周序号（一年有52个周）
+                weekNumbers: true,
 
-                            // validRange: function (currentDate) {
-                            //     return {
-                            //         start: currentDate.clone().subtract(0, 'days'),
-                            //         end: currentDate.clone().add(4, 'days') // exclusive end, so 3
-                            //     };
-                            // },
+                // validRange: function (currentDate) {
+                //     return {
+                //         start: currentDate.clone().subtract(0, 'days'),
+                //         end: currentDate.clone().add(4, 'days') // exclusive end, so 3
+                //     };
+                // },
 
-                            // // 设置为true，则我们可以点击周数/日期数等元素触发相应时间了
-                            // navLinks: true,
-                            // // 当点击天名称的时候触发回调函数，触发函数后不会跳转到对应的视图。
-                            // navLinkDayClick: function (date, jsEvent) {
-                            //     console.log('day', date.format()); // date is a moment
-                            //     console.log('coords', jsEvent.pageX, jsEvent.pageY);
-                            // },
+                // // 设置为true，则我们可以点击周数/日期数等元素触发相应时间了
+                // navLinks: true,
+                // // 当点击天名称的时候触发回调函数，触发函数后不会跳转到对应的视图。
+                // navLinkDayClick: function (date, jsEvent) {
+                //     console.log('day', date.format()); // date is a moment
+                //     console.log('coords', jsEvent.pageX, jsEvent.pageY);
+                // },
 
-                            // 点击日期时触发的回调
-                            dayClick: function (date, jsEvent, view) {
-                                // // date是被点击的日期的Date对象
-                                // alert('Clicked on: ' + date.format());
-                                // // jsEvent是一个Dom原声对象，包含点击事件发生时鼠标的X/Y坐标数据
-                                // alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-                                // // 点击事件发生时所在的视图
-                                // alert('Current view: ' + view.name);
-                                // // this是被点击的日期的<td>的dom对象
-                                // $(this).css('background-color', 'red');
-                            },
+                // 点击日期时触发的回调
+                dayClick: function (date, jsEvent, view) {
+                    // // date是被点击的日期的Date对象
+                    // alert('Clicked on: ' + date.format());
+                    // // jsEvent是一个Dom原声对象，包含点击事件发生时鼠标的X/Y坐标数据
+                    // alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+                    // // 点击事件发生时所在的视图
+                    // alert('Current view: ' + view.name);
+                    // // this是被点击的日期的<td>的dom对象
+                    // $(this).css('background-color', 'red');
+                },
 
-                            // 点击事件时触发的回调
-                            eventClick: function (calEvent, jsEvent, view) {
-                                alert('Event: ' + calEvent.title);
-                                alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-                                alert('View: ' + view.name);
+                // 点击事件时触发的回调
+                eventClick: function (calEvent, jsEvent, view) {
+                    alert('Event: ' + calEvent.title);
+                    alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+                    alert('View: ' + view.name);
 
-                                // change the border color just for fun
-                                $(this).css('border-color', 'red');
+                    // change the border color just for fun
+                    $(this).css('border-color', 'red');
 
-                            },
-
-
-                            // 设置日程安排得可选范围，默认从0点到24点
-                            minTime: '08:00:00',
-                            maxTime: '18:00:00',
+                },
 
 
-                            eventPhase: 5,
-                            editable: false,
-
-                            // 可以拖动
-                            selectable: true,
-                            // 在selectable为true（默认为false）的情况下，可以拖拽选择每个视图中的多个对象，并且报告日期时间
-                            select: function (start, end, jsEvent, view) {
-                                console.log(start);
-                                console.log(end);
-                                console.log(jsEvent);
-                            },
-
-                            events: [
-                                {
-                                    id:'jdfoisdfo793820j32fj2j3f',
-                                    title: '桌游活动',
-                                    start: '2018-08-20T10:00:00',
-                                    end:'2018-08-20T11:30:00',
-                                    allDay: false, // will make the time show
-                                    backgroundColor:'yellow',
-                                    textColor:'black',
-                                    url:'http://www.baidu.com',
-                                }],
-
-                                eventLimit: true,
+                // 设置日程安排得可选范围，默认从0点到24点
+                minTime: '08:00:00',
+                maxTime: '18:00:00',
 
 
-                            });
 
-                    });
+
+                // 可以拖动
+                selectable: true,
+                // 在selectable为true（默认为false）的情况下，可以拖拽选择每个视图中的多个对象，并且报告日期时间
+                select: function (start, end, jsEvent, view) {
+                    console.log(start);
+                    console.log(end);
+                    console.log(jsEvent);
+                },
+
+                // 在这里可以定义事件，也就是日程安排
+                events: [{
+                        id: 'jdfoisdfo793820j32fj2j3f',
+                        title: '桌游活动',
+                        start: '2018-08-29T10:00:00',
+                        end: '2018-08-29T11:30:00',
+                        allDay: false, // will make the time show
+                        backgroundColor: 'yellow',
+                        textColor: 'black',
+                        url: 'http://www.baidu.com',
+                    },
+                    {
+                        id: 'jdfoisdfo791111j32fj2j3f',
+                        title: '桌游活动2',
+                        start: '2018-08-29T11:30:00',
+                        end: '2018-08-29T13:30:00',
+                        allDay: false, // will make the time show
+                        backgroundColor: '#ffffff',
+                        textColor: 'black',
+                        url: 'http://www.baidu.com',
+                    },
+                ],
+
+                // 自定义视图，如果自带的mouth/week等视图不满意，我们可以自己定义一个
+                views: {
+                    agendaFourDay: {
+                        type: 'agenda',
+                        // duration: {
+                        //     days: 9
+                        // },
+                        start: new Date()
+                        end: currentDate.clone().add(9,'days'),
+                        buttonText: '自定义',
+                    }
+                },
+
+                // 这个属性设置每个日期上可见的时间如果超过3个是否被隐藏
+                eventLimit: true,
+
+
+            });
+
+        });
     </script>
 
 
