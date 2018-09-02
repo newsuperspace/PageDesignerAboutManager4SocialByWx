@@ -56,13 +56,15 @@
         function addEvent() {
             let url = "http://ddaig.nat200.top/grow/tryAction_getEventSources.action";
             let param = {
-
+                // 请求参数为空
             }
             $.post(url, param, function (data, textStatus, req) {
                 console.log("AJAX通讯正常");
+                // 通过FullCalendar的“添加事件源”的功能，将JSON对象直接设置成日历的事件源，然后自动绘制时间图标到日历上显示出来。
                 $('#calendar').fullCalendar('addEventSource', data)
             });
         }
+
 
 
         $(function () {
@@ -91,10 +93,12 @@
                 customButtons: {
                     myCustomButton: {
                         text: '自定义按钮',
+                        // click: function () {
+                        //     weui.alert('点击了自定义按钮!');
+                        // },
                         click: function () {
-                            weui.alert('点击了自定义按钮!');
+                            $('#calendar').fullCalendar('changeView', 'agenda4A');
                         },
-
                     }
                 },
                 // 按钮阵列中显示的按钮的中文文本（不设置buttonText，则默认显示英文或符号）
@@ -117,19 +121,18 @@
                 // 是否显示周序号（一年有52个周）
                 weekNumbers: true,
 
-                // validRange: function (currentDate) {
-                //     return {
-                //         start: currentDate.clone().subtract(0, 'days'),
-                //         end: currentDate.clone().add(4, 'days') // exclusive end, so 3
-                //     };
-                // },
-
                 // // 设置为true，则我们可以点击周数/日期数等元素触发相应时间了
                 // navLinks: true,
                 // // 当点击天名称的时候触发回调函数，触发函数后不会跳转到对应的视图。
                 // navLinkDayClick: function (date, jsEvent) {
                 //     console.log('day', date.format()); // date is a moment
                 //     console.log('coords', jsEvent.pageX, jsEvent.pageY);
+                // },
+
+                // 设置日历上（包括自定义视图）可见日期范围，可与visibleRange叠加效应
+                // validRange: {
+                //     start: '2018-09-03',
+                //     end: '2018-09-08'
                 // },
 
                 // 点击日期时触发的回调
@@ -161,18 +164,19 @@
                 maxTime: '18:00:00',
 
 
-
-
-                // 可以拖动
+                // 可以选择日期（月视图）/时间（周和天视图）
                 selectable: true,
-                // 在selectable为true（默认为false）的情况下，可以拖拽选择每个视图中的多个对象，并且报告日期时间
+                // 在selectable为true（默认为false）的情况下，可以选择每个视图中的多个时间，并且报告所选择的时间信息
                 select: function (start, end, jsEvent, view) {
+                    // 开始时间
                     console.log(start);
+                    // 结束时间
                     console.log(end);
+                    // 返回原声Dom对象，包含选中的时间/日期格子的位置坐标
                     console.log(jsEvent);
                 },
 
-                // 在这里可以定义事件，也就是日程安排
+                // 在这里可以预设置事件（实际应用情境应该是通过AJAX从服务器获取包含制定时间范围内的日程的JSON数组对象并设置为日历的事件源），也就是日程安排
                 events: [{
                         id: 'jdfoisdfo793820j32fj2j3f',
                         title: '桌游活动',
@@ -197,15 +201,28 @@
 
                 // 自定义视图，如果自带的mouth/week等视图不满意，我们可以自己定义一个
                 views: {
-                    agendaFourDay: {
+                    agenda4A: {
                         type: 'agenda',
                         // duration: {
                         //     days: 9
                         // },
-                        start: new Date()
-                        end: currentDate.clone().add(9,'days'),
-                        buttonText: '自定义',
-                    }
+                        // 定义咱们的自定义视图中的可见日期范围，start设置成0代表当前（但是当天不可操作），end设置成8代表自定义视图上显示从当天（0）往后共8天的日期
+                        visibleRange: function (currentDate) {
+                            return {
+                                start: currentDate.clone().subtract(0, 'days'),
+                                end: currentDate.clone().add(7, 'days') // exclusive end, so 3
+                            };
+                        },
+                        // 显示当前自定义视图的可见日期范围，单独使用只显示从开始时间到结束时间前一天的日期，其他日期不可见，可如果和visibleRange重叠使用
+                        // 则实际显示效果是visibleRange范围和validRange的交集，记住是交集
+                        // 因此这里为了达成“显示从明天开始往后七天的效果”必须两个属性重叠使用，不然自定义视图上会显示包含今天的日期，而如果强制设置start为-1
+                        // 则自定义视图上虽然其实日期变为了明天，但时间的选择会收到当前时间的影响（过去的时间不能选择），所以目前来说像我这样设置自定义视图
+                        // 是唯一选择
+                        validRange: {
+                            start: '2018-09-03',
+                        },
+                        buttonText: 'A活动室',
+                    },
                 },
 
                 // 这个属性设置每个日期上可见的时间如果超过3个是否被隐藏
@@ -216,6 +233,7 @@
 
         });
     </script>
+
 
 
 </body>
