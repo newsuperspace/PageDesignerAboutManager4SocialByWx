@@ -17,6 +17,9 @@
 
 <body>
 
+    <a name="agendaDay" id="agendaDay" class="btn btn-success" href="#" onclick="addEvent();" role="button">agendaDay</a>
+    <a name="sure" id="sure" class="btn btn-warning unselectCancel" href="#" role="button" onclick="sure();">选定</a>
+
     <div class="container">
         <div class="row mt-4">
             <div class="col-md-2"></div>
@@ -29,8 +32,6 @@
         </div>
     </div>
 
-
-    <a name="agendaDay" id="agendaDay" class="btn btn-success" href="#" onclick="addEvent();" role="button">agendaDay</a>
 
 
 
@@ -46,6 +47,16 @@
     <script type="text/javascript" src="./fullcalendar.js"></script>
     <script type="text/javascript" src="./zh-cn.js"></script>
     <script>
+        'use strict';
+
+        function sure() {
+            // 取消日历上的选择
+            // $('#calendar').fullCalendar('unselect');
+            let startTime = localStorage.getItem("start");
+            let endTime = localStorage.getItem("end");
+            weui.alert("您所选定的活动时间是："+startTime+"到"+endTime);
+        }
+
         function getDate() {
             // 获取当前日期
             var moment = $('#calendar').fullCalendar('getDate');
@@ -66,7 +77,6 @@
         }
 
 
-
         $(function () {
             $('#calendar').fullCalendar({
                 // 你的选项配置和回调函数
@@ -83,6 +93,9 @@
                 // 设置每周第一天，数字int型，默认0（周日）
                 firstDay: 1,
 
+                // 展示的默认视图
+                defaultView: 'agenda4A',
+
                 // 设置页面上方的按钮阵列
                 header: {
                     left: 'prev,next today myCustomButton',
@@ -92,7 +105,7 @@
                 // 自定义按钮集合，这些按钮可以显示在header或footer上
                 customButtons: {
                     myCustomButton: {
-                        text: '自定义按钮',
+                        text: '我的视图',
                         // click: function () {
                         //     weui.alert('点击了自定义按钮!');
                         // },
@@ -148,60 +161,56 @@
                 },
 
                 // 点击事件时触发的回调
-                eventClick: function (calEvent, jsEvent, view) {
-                    alert('Event: ' + calEvent.title);
-                    alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-                    alert('View: ' + view.name);
+                // eventClick: function (calEvent, jsEvent, view) {
+                //     alert('Event: ' + calEvent.title);
+                //     alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+                //     alert('View: ' + view.name);
 
-                    // change the border color just for fun
-                    $(this).css('border-color', 'red');
+                //     // change the border color just for fun
+                //     $(this).css('border-color', 'red');
 
-                },
+                // },
 
 
                 // 设置日程安排得可选范围，默认从0点到24点
                 minTime: '08:00:00',
                 maxTime: '18:00:00',
 
-
-                // 可以选择日期（月视图）/时间（周和天视图）
-                selectable: true,
-                // 在selectable为true（默认为false）的情况下，可以选择每个视图中的多个时间，并且报告所选择的时间信息
-                select: function (start, end, jsEvent, view) {
-                    // 开始时间
-                    console.log(start);
-                    // 结束时间
-                    console.log(end);
-                    // 返回原声Dom对象，包含选中的时间/日期格子的位置坐标
-                    console.log(jsEvent);
-                },
-
                 // 在这里可以预设置事件（实际应用情境应该是通过AJAX从服务器获取包含制定时间范围内的日程的JSON数组对象并设置为日历的事件源），也就是日程安排
                 events: [{
-                        id: 'jdfoisdfo793820j32fj2j3f',
-                        title: '桌游活动',
-                        start: '2018-08-29T10:00:00',
-                        end: '2018-08-29T11:30:00',
-                        allDay: false, // will make the time show
-                        backgroundColor: 'yellow',
-                        textColor: 'black',
-                        url: 'http://www.baidu.com',
-                    },
-                    {
-                        id: 'jdfoisdfo791111j32fj2j3f',
-                        title: '桌游活动2',
-                        start: '2018-08-29T11:30:00',
-                        end: '2018-08-29T13:30:00',
-                        allDay: false, // will make the time show
-                        backgroundColor: '#ffffff',
-                        textColor: 'black',
-                        url: 'http://www.baidu.com',
-                    },
+                    id: '1',
+                    title: '上午',
+                    start: '2018-09-04T09:00:00',
+                    end: '2018-09-04T12:00:00',
+                    allDay: false, // will make the time show
+                    backgroundColor: 'yellow',
+                    textColor: 'black',
+                    url: 'http://www.baidu.com',
+                },
+                {
+                    id: '2',
+                    title: '下午',
+                    start: '2018-09-04T13:30:00',
+                    end: '2018-09-04T18:00:00',
+                    allDay: false, // will make the time show
+                    backgroundColor: '#ffffff',
+                    textColor: 'black',
+                    url: 'http://www.baidu.com',
+                },
                 ],
 
                 // 自定义视图，如果自带的mouth/week等视图不满意，我们可以自己定义一个
                 views: {
                     agenda4A: {
+                        // 设置agenda系列视图中是否现实“all-day”全天格，默认为true（显示）
+                        allDaySlot: false,
+                        // 设置时间轴显示的时间格式
+                        slotLabelFormat: 'HH:mm',
+
+                        // 可以选择日期（月视图）/时间（周和天视图）
+                        selectable: true,
+
+                        // 设置默认视图的基础类型
                         type: 'agenda',
                         // duration: {
                         //     days: 9
@@ -210,7 +219,8 @@
                         visibleRange: function (currentDate) {
                             return {
                                 start: currentDate.clone().subtract(0, 'days'),
-                                end: currentDate.clone().add(7, 'days') // exclusive end, so 3
+                                // 这里设置可发布活动的最后一天，因此需要后台进行设置AJAX
+                                end: currentDate.clone().add(getEndDay(), 'days')
                             };
                         },
                         // 显示当前自定义视图的可见日期范围，单独使用只显示从开始时间到结束时间前一天的日期，其他日期不可见，可如果和visibleRange重叠使用
@@ -219,10 +229,52 @@
                         // 则自定义视图上虽然其实日期变为了明天，但时间的选择会收到当前时间的影响（过去的时间不能选择），所以目前来说像我这样设置自定义视图
                         // 是唯一选择
                         validRange: {
-                            start: '2018-09-03',
+                            // 作为可发布活动的第一天，需要AJAX由后台设置，因此这里应该是一个函数
+                            start: getStartDay(),
                         },
+                        // 设置日程视图中的事件是否可以重叠，值为布尔类型，默认值为true，事件会相互重叠，最多一半会被遮住。
+                        slotEventOverlap: false,
+
+                        // 设置当点击页面其他地方的时候，是否清除已选择的区域，值为布尔类型，默认值 true。只有当 selectable 设置为true的时候才有效。
+                        unselectAuto: false,
+                        // 如果已设置unselectAuto为true（默认），则点击页面中任何其他地方都会取消选择，只有unselectCancel规定的包含特定css类的DOM对象除外
+                        unselectCancel: ".unselectCancel",
+
+
                         buttonText: 'A活动室',
                     },
+                },
+
+                // 用户拖选该最小长度后（15对应一个半小时一个格子，30对应1个小时两个格子）才能选中
+                selectMinDistance: 30,
+
+                // 【全局视图属性】当拖拽选择触及到其他已有事件的时候就会触发本回调，当返回结果为false时取消选择
+                selectOverlap: function (event) {
+                    console.log("selectOverlap is running");
+                    console.log(event);
+                    return false;
+                },
+                // // ※※【全局视图属性】根据用户选择内容，精确控制可选区域（例如一天中12点到1点为午休时间，不能选择）
+                // selectAllow: function (selectInfo) {
+                //     console.log("selectAllow is running");
+                //     console.log(selectInfo.start);
+                //     console.log(selectInfo.end);
+                //     console.log(selectInfo.resourceId);
+                //     // 返回true则允许选中，选择false为不允许选中
+                //     return false;
+                // },
+
+                // 【全局视图属性】在selectable为true（默认为false）的情况下，可以选择每个视图中的多个时间，并且报告所选择的时间信息
+                select: function (start, end, jsEvent, view) {
+                    // 开始时间start.format() → 2018-09-05T08:30:00
+                    console.log(start.format());
+                    // 结束时间end.format() → 2018-09-05T10:00:00
+                    console.log(end.format());
+                    // 返回原声Dom对象，包含选中的时间/日期格子的位置坐标
+                    console.log("x:"+jsEvent.pageX+",y:"+jsEvent.pageY);
+                    // 将数据更新到localStorage中备用
+                    localStorage.setItem("start",start.format());
+                    localStorage.setItem("end",end.format());
                 },
 
                 // 这个属性设置每个日期上可见的时间如果超过3个是否被隐藏
@@ -232,6 +284,18 @@
             });
 
         });
+
+        function getStartDay() {
+            // 这里应该通过AJAX由后端根据当前时间、操作者层级类型（社区用户可在每周五发起下周活动，其他层级只能在周日当天发起下周活动）动态设置
+            return '2018-09-03';
+        }
+
+        function getEndDay() {
+            // 这里应该通过AJAX由后端根据当前时间和操作者层级类型动态设置。
+            return 7;
+        }
+
+
     </script>
 
 
