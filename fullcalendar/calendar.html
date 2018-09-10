@@ -34,9 +34,6 @@
 
 
 
-
-
-
     <script type="text/javascript" src="./jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
         crossorigin="anonymous"></script>
@@ -173,15 +170,15 @@
 
 
                 // 设置日程安排得可选范围，默认从0点到24点
-                minTime: '08:00:00',
-                maxTime: '18:00:00',
+                minTime: '09:00:00',
+                maxTime: '17:00:00',
 
                 // 在这里可以预设置事件（实际应用情境应该是通过AJAX从服务器获取包含制定时间范围内的日程的JSON数组对象并设置为日历的事件源），也就是日程安排
                 events: [{
                     id: '1',
                     title: '上午',
-                    start: '2018-09-04T09:00:00',
-                    end: '2018-09-04T12:00:00',
+                    start: '2018-09-08T12:00:00',
+                    end: '2018-09-08T13:00:00',
                     allDay: false, // will make the time show
                     backgroundColor: 'yellow',
                     textColor: 'black',
@@ -190,8 +187,8 @@
                 {
                     id: '2',
                     title: '下午',
-                    start: '2018-09-04T13:30:00',
-                    end: '2018-09-04T18:00:00',
+                    start: '2018-09-08T13:30:00',
+                    end: '2018-09-08T15:00:00',
                     allDay: false, // will make the time show
                     backgroundColor: '#ffffff',
                     textColor: 'black',
@@ -287,11 +284,13 @@
 
         function getStartDay() {
             // 这里应该通过AJAX由后端根据当前时间、操作者层级类型（社区用户可在每周五发起下周活动，其他层级只能在周日当天发起下周活动）动态设置
-            return '2018-09-03';
+            // 自定义视图你希望显示的第一天是哪号，这里就填什么即可，原则上是当天的明天
+            return '2018-09-06';
         }
 
         function getEndDay() {
             // 这里应该通过AJAX由后端根据当前时间和操作者层级类型动态设置。
+            // 你希望从getStartDay() 第一天开始整个自定义视图总共显示多少天这里就返回多少即可
             return 7;
         }
 

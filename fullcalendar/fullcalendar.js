@@ -4,6 +4,10 @@
  * (c) 2018 Adam Shaw
  */
 (function webpackUniversalModuleDefinition(root, factory) {
+
+    
+
+
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory(require("moment"), require("jquery"));
 	else if(typeof define === 'function' && define.amd)
