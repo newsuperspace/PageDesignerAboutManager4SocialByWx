@@ -19,12 +19,21 @@
 
     <a name="agendaDay" id="agendaDay" class="btn btn-success" href="#" onclick="addEvent();" role="button">agendaDay</a>
     <a name="sure" id="sure" class="btn btn-warning unselectCancel" href="#" role="button" onclick="sure();">选定</a>
+    <a name="sure" id="sure" class="btn btn-warning unselectCancel" href="#" role="button" onclick="deleteEvent();">清除事件</a>
 
     <div class="container">
         <div class="row mt-4">
             <div class="col-md-2"></div>
             <div class="col-md-8">
 
+                <div class="form-group">
+                  <label for="aaa">当前活动室：</label>
+                  <select class="form-control form-control-sm" name="aaa" id="aaa" onchange="weui.alert($('#aaa').val());">
+                    <option value="1">老年活动中心101</option>
+                    <option value="2">老年活动中心202</option>
+                    <option value="3">老年活动中心303</option>
+                  </select>
+                </div>
                 <div id='calendar'></div>
 
             </div>
@@ -71,6 +80,10 @@
                 // 通过FullCalendar的“添加事件源”的功能，将JSON对象直接设置成日历的事件源，然后自动绘制时间图标到日历上显示出来。
                 $('#calendar').fullCalendar('addEventSource', data)
             });
+        }
+
+        function deleteEvent(){
+            $('#calendar').fullCalendar( 'removeEventSources');
         }
 
 
@@ -245,7 +258,7 @@
                 // 用户拖选该最小长度后（15对应一个半小时一个格子，30对应1个小时两个格子）才能选中
                 selectMinDistance: 30,
 
-                // 【全局视图属性】当拖拽选择触及到其他已有事件的时候就会触发本回调，当返回结果为false时取消选择
+                // 【全局视图属性】当拖拽选择触及到视图上其他已有事件的时候就会触发本回调，当返回结果为false时取消选择
                 selectOverlap: function (event) {
                     console.log("selectOverlap is running");
                     console.log(event);
