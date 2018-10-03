@@ -6,7 +6,6 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta http-equiv="Access-Control-Allow-Origin" content="*">
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
@@ -60,16 +59,19 @@
   <script type="text/javascript" src="https://res.wx.qq.com/open/libs/weuijs/1.1.4/weui.min.js"></script>
   <script type="text/javascript" src="js/weui4me.js"></script>
   <script type="text/javascript">
-    
-    function getImg(){
+    function getImg() {
       $input = $("#uploaderInput");
       console.log($input[0].files);
     }
-    
+
     $(function () {
 
       // 通过onBeforeQueued()校验的允许上传的图片的数量
       var uploadCount = 0;
+      // 用来记录上传文件信息的全局属性
+      var  fileName  = "";
+
+
 
       weui.uploader('#uploader', {
         url: 'http://localhost/grow/tryAction_upload.action',
@@ -124,13 +126,18 @@
 
           // console.log(this.status); // 文件的状态：'ready', 'progress', 'success', 'fail'
           // console.log(this.base64); // 如果是base64上传，file.base64可以获得文件的base64
-          var url = this.url;
-          console.log("url="+url);
-          var dom = '<li class="weui-uploader__file weui-uploader__file_status" style="background-image:url(#url#)" id="'+'li'+this.id+'"><div  class="weui-uploader__file-content">50%</div></li>';
-          dom.replace('#url#',url);
+          var u = this.url;
+          console.log("url=" + u);
+          var dom =
+            '<li class="weui-uploader__file weui-uploader__file_status" style="background-image:url(#url#)" id="' +
+            'li' + this.id + '"><div  class="weui-uploader__file-content">50%</div></li>';
+          dom.replace('#url#',u);
           var $dom = $(dom);
-          $dom.find("div").text("0"+"%");
+          $dom.find("div").text("0" + "%");
           $("#uploaderFiles").prepend($dom);
+          
+          fileName = this.name;
+          console.log("上传的文件名："+fileName);
 
           this.upload(); // 如果是手动上传，这里可以通过调用upload来实现；也可以用它来实现重传。
           // this.stop(); // 调用中断上传的方法
@@ -143,6 +150,13 @@
           console.log(this, data, headers);
           // $.extend(data, { test: 1 }); // 可以扩展此对象来控制上传参数
           // $.extend(headers, { Origin: 'http://127.0.0.1' }); // 可以扩展此对象来控制上传头部
+          $.extend(headers, {
+            'Access-Control-Allow-Origin': '*',
+          });
+
+          $.extend(data,{
+            fileName: fileName,
+          });
 
           // return false; // 阻止文件上传
         },
