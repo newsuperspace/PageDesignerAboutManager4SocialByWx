@@ -13,7 +13,36 @@
   <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/1.1.3/weui.min.css">
 </head>
 
-<body>
+<body style="background-color: #f8f8f8;">
+
+  <div class="weui-cells__title">活动名</div>
+  <div class="weui-cells">
+    <div class="weui-cell">
+      <div class="weui-cell__bd">
+        <input class="weui-input" type="text" placeholder="请输入文本" />
+      </div>
+    </div>
+  </div>
+
+  <div class="weui-cells__title">活动日期</div>
+  <div class="weui-cells">
+    <div class="weui-cell">
+      <div class="weui-cell__bd">
+        <input class="weui-input" type="text" placeholder="请输入文本" />
+      </div>
+    </div>
+  </div>
+
+  <div class="weui-cells__title">活动详情</div>
+  <div class="weui-cells weui-cells_form">
+    <div class="weui-cell">
+      <div class="weui-cell__bd">
+        <textarea class="weui-textarea" placeholder="请输入文本" rows="5" oninput="getNumbers(this)"></textarea>
+        <div class="weui-textarea-counter"><span id="total">0</span>/1000</div>
+      </div>
+    </div>
+  </div>
+
 
   <div class="weui-gallery" id="gallery">
     <span class="weui-gallery__img" id="galleryImg"></span>
@@ -23,8 +52,6 @@
       </a>
     </div>
   </div>
-
-
   <div class="weui-cells weui-cells_form" id="uploader">
     <div class="weui-cell">
       <div class="weui-cell__bd">
@@ -59,6 +86,18 @@
   <script type="text/javascript" src="https://res.wx.qq.com/open/libs/weuijs/1.1.4/weui.min.js"></script>
   <script type="text/javascript" src="js/weui4me.js"></script>
   <script type="text/javascript">
+    
+    
+    // 字数统计
+    function getNumbers(self) {
+      $self = $(self);
+      let area = $self.val();
+      let len = area.length;
+      console.log(len);
+      $("#total").text(len);
+    }
+
+
     function getImg() {
       $input = $("#uploaderInput");
       console.log($input[0].files);
@@ -69,7 +108,7 @@
       // 通过onBeforeQueued()校验的允许上传的图片的数量
       var uploadCount = 0;
       // 用来记录上传文件信息的全局属性
-      var  fileName  = "";
+      var fileName = "";
 
 
 
@@ -131,13 +170,13 @@
           var dom =
             '<li class="weui-uploader__file weui-uploader__file_status" style="background-image:url(#url#)" id="' +
             'li' + this.id + '"><div  class="weui-uploader__file-content">50%</div></li>';
-          dom.replace('#url#',u);
+          dom.replace('#url#', u);
           var $dom = $(dom);
           $dom.find("div").text("0" + "%");
           $("#uploaderFiles").prepend($dom);
-          
+
           fileName = this.name;
-          console.log("上传的文件名："+fileName);
+          console.log("上传的文件名：" + fileName);
 
           this.upload(); // 如果是手动上传，这里可以通过调用upload来实现；也可以用它来实现重传。
           // this.stop(); // 调用中断上传的方法
@@ -154,7 +193,7 @@
             'Access-Control-Allow-Origin': '*',
           });
 
-          $.extend(data,{
+          $.extend(data, {
             fileName: fileName,
           });
 
